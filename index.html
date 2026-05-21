@@ -1,13 +1,23 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>proyecto-montauk</title>
+    <title>Proyecto Montauk</title>
+    <style>
+      body { margin: 0; overflow: hidden; background-color: #000; }
+      #app-ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+      #webgl-canvas { display: block; width: 100vw; height: 100vh; }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <!-- Capa para la UI (menús, botones) -->
+    <div id="app-ui"></div>
+    
+    <!-- Capa para Three.js -->
+    <canvas id="webgl-canvas"></canvas>
+    
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
