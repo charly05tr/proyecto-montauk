@@ -1,0 +1,11 @@
+Model Information:
+* title:	Stranger things room
+* source:	https://sketchfab.com/3d-models/stranger-things-room-e1366c1e740143df9baf63b2704272b6
+* author:	daniilzaharov871 (https://sketchfab.com/daniilzaharov871)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Stranger things room" (https://sketchfab.com/3d-models/stranger-things-room-e1366c1e740143df9baf63b2704272b6) by daniilzaharov871 (https://sketchfab.com/daniilzaharov871) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
