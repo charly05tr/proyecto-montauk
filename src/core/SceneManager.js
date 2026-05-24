@@ -3,12 +3,12 @@ import { loadRoom, updateScene1 } from '../scenes/Scene1/index.js'
 
 let currentScene
 
-export function initSceneManager() {
+export function initSceneManager(physicsWorld, player) {
   currentScene = new THREE.Scene()
   currentScene.background = new THREE.Color(0x020006)
-  
-  loadRoom(currentScene)
-  
+
+  loadRoom(currentScene, physicsWorld, player)
+
   return currentScene
 }
 

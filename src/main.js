@@ -2,9 +2,10 @@ import * as THREE from 'three'
 import { initLoadingScreen } from './ui/Loading/index.js'
 import { initOverlay } from './ui/Overlay/index.js'
 import { initRenderer } from './core/Renderer.js'
-import { initCamera, getCamera, moveCamera } from './core/Camera.js'
 import { initGlobalLights, updateGlobalLights } from './core/Lights.js'
 import { initSceneManager, getScene, updateCurrentScene } from './core/SceneManager.js'
+import { PhysicsWorld } from './physics/PhysicsWorld.js'
+import { Player } from './core/Player.js'
 
 const app = document.querySelector('#app')
 
@@ -12,32 +13,48 @@ const app = document.querySelector('#app')
 initLoadingScreen()
 initOverlay()
 
-// 2. Inicializar Core
-const renderer = initRenderer(app)
-const camera = initCamera()
-const scene = initSceneManager()
+// 2. Físicas
+const physicsWorld = new PhysicsWorld()
 
-// 3. Inicializar Luces Globales
+// 3. Crear escena global primero
+const scene = new THREE.Scene()
+scene.background = new THREE.Color(0x020006)
+
+// 4. Inicializar Jugador (con la escena)
+const player = new Player(scene, physicsWorld)
+
+// 5. Inicializar Core
+const renderer = initRenderer(app)
+
+// 6. Cargar la habitación inyectando el jugador y las físicas
+import { loadRoom } from './scenes/Scene1/index.js'
+loadRoom(scene, physicsWorld, player)
+
+// 7. Inicializar Luces Globales
 initGlobalLights(scene)
 
-// 4. Reloj y Loop de Animación
+// 8. Reloj y Loop de Animación
 const clock = new THREE.Clock()
 
 function animate() {
   requestAnimationFrame(animate)
   const dt = Math.min(clock.getDelta(), 0.05)
-  
-  // Actualizar movimiento de la cámara
-  moveCamera(dt)
-  
+
+  // Avanzar simulación física
+  physicsWorld.step(dt)
+
+  // Actualizar controles y cámara del jugador
+  player.update()
+
   // Sincronizar luz con la posición de la cámara
-  updateGlobalLights(camera.position)
-  
-  // Actualizar lógica de la escena actual (ej. luces navideñas)
-  updateCurrentScene(clock.elapsedTime)
-  
+  updateGlobalLights(player.camera.position)
+
+  // Actualizar lógica de la escena actual
+  updateCurrentScene(clock.elapsedTime);
+
   // Renderizar frame
-  renderer.render(scene, camera)
+  renderer.render(scene, player.camera)
+
 }
 
 animate()
